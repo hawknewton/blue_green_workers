@@ -22,7 +22,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-{{ checksum "blue_green_workers.gemspec" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
@@ -34,11 +34,7 @@ jobs:
       - save_cache:
           paths:
             - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-      # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+          key: v1-dependencies-{{ checksum "blue_green_workers.gemspec" }}
 
       # run tests!
       - run:
