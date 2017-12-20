@@ -8,5 +8,7 @@
 /tmp/
 spec/examples.txt
 
+Gemfile.lock
+
 # rspec failure tracking
 .rspec_status
