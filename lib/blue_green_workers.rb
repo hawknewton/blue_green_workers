@@ -27,6 +27,7 @@ module BlueGreenWorkers
     else
       logger.debug 'Workers not active, skipping BlueGreenWorkers#execute'
       opts[:delay] && sleep(opts[:delay])
+      opts[:return]
     end
   end
 

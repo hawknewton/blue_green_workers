@@ -53,7 +53,8 @@ end
 ```
 
 Options include*
-`delay` -- Delay for `n` seconds if we're not the active cluster
+* `delay` -- Delay for `n` seconds if we're not the active cluster
+* `return` -- What to return if we're not the active cluster
 
 ## Development
 

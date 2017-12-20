@@ -80,8 +80,14 @@ RSpec.describe BlueGreenWorkers do
       end
 
       it 'sleeps for delay: seconds' do
-        expect(described_class).to receive(:sleep).with 10
-        described_class.execute(delay: 10) { true }
+        expect(described_class).to receive(:sleep).with(10).and_return 10
+        result = described_class.execute(delay: 10) { true }
+        expect(result).to be_nil
+      end
+
+      it 'returns return:' do
+        result = described_class.execute(return: []) { true }
+        expect(result).to eq []
       end
     end
 
