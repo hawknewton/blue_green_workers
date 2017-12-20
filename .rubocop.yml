@@ -1,0 +1,11 @@
+AllCops:
+  TargetRubyVersion: 2.4
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+    - '*.gemspec'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*.rb'
