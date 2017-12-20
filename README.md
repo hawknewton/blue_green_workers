@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/hawknewton/blue_green_workers/tree/master.svg?style=svg)](https://circleci.com/gh/hawknewton/blue_green_workers/tree/master)
+
 # BlueGreenWorkers
 
 This gem provides helpers to coordiante workers across multiple clusters that for which only one cluster should be active at a time.  Think [blue green deployments](https://martinfowler.com/bliki/BlueGreenDeployment.html)
