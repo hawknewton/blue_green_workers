@@ -25,6 +25,7 @@ This gem doesn't attempt to provide an interface through which you specify which
 BlueGreenWorkers.configure do |config|
   config.cluster_name = 'blue'
   config.determine_active_cluster { ActiveCluster.first.value }
+  config.refresh_interval = 10
   config.activate { QueueClient.listen! }
   config.deactivate { QueueClient.shutdown! }
   config.logger = Logger.new STDOUT
@@ -33,7 +34,7 @@ end
 
 * `cluster_name` - Defines the name for this cluster.  Something like `ENV['CLUSTER_NAME']` probably makes sense
 * `determine_active_cluster` - Takes a block that returns the name of the current active cluster
-* `refresh_interval` (optional) - How often to cache the active cluster, `0` (the default) will call the block passed to `determine_active_cluster` every time a worker is executed.
+* `refresh_interval` (optional) - How often to cache the active cluster in seconds, `0` (the default) will call the block passed to `determine_active_cluster` every time a worker is executed.
 * `activate` (optiona) - Block to call when this cluster goes active.  Will be called during initialization.  `refresh_interval` must be specified.
 * `deactivate` (optiona) - Block to call when this cluster goes passive.  This block will not be called if the cluster is started in passive mode.  `refresh_interval` must be specified.
 * `logger` (optiona) - Logger to use
@@ -44,12 +45,15 @@ In addition to attaching event handles to `activate` and `deactivate` you can al
 
 ```ruby
 loop do
-  BlueGreenWorkers.execute do
+  BlueGreenWorkers.execute(opts) do
     # Do some work, poll for stuff, etc
   end
   sleep 60
 end
 ```
+
+Options include*
+`delay` -- Delay for `n` seconds if we're not the active cluster
 
 ## Development
 

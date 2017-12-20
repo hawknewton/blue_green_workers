@@ -78,6 +78,11 @@ RSpec.describe BlueGreenWorkers do
         described_class.execute { ran = true }
         expect(ran).to be false
       end
+
+      it 'sleeps for delay: seconds' do
+        expect(described_class).to receive(:sleep).with 10
+        described_class.execute(delay: 10) { true }
+      end
     end
 
     context 'when our cluster is active' do
