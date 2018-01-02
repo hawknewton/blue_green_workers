@@ -4,7 +4,7 @@ module BlueGreenWorkers
   RSpec.describe Config do
     describe '#validate' do
       let(:cluster_name) { 'test' }
-      let(:active_cluster_block) { proc{} }
+      let(:active_cluster_block) { proc {} }
 
       subject(:validate) do
         instance = Config.new.tap do |config|

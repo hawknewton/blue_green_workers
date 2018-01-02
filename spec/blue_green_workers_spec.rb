@@ -24,7 +24,7 @@ RSpec.describe BlueGreenWorkers do
     end
 
     it 'sets an active_cluster block' do
-      active_cluster = proc{}
+      active_cluster = proc {}
       BlueGreenWorkers.configure do |config|
         config.determine_active_cluster(&active_cluster)
         config.cluster_name = 'us'
