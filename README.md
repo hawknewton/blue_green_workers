@@ -47,14 +47,14 @@ In addition to attaching event handles to `activate` and `deactivate` you can al
 
 ```ruby
 loop do
-  BlueGreenWorkers.execute(opts) do
+  BlueGreenWorkers.when_active(opts) do
     # Do some work, poll for stuff, etc
   end
   sleep 60
 end
 ```
 
-Options include*
+Options include:
 * `delay` -- Delay for `n` seconds if we're not the active cluster
 * `return` -- What to return if we're not the active cluster
 

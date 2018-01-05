@@ -61,7 +61,7 @@ RSpec.describe BlueGreenWorkers do
     end
   end
 
-  describe '#execute' do
+  describe '#when_active' do
     before do
       BlueGreenWorkers.configure do |config|
         config.determine_active_cluster { active_cluster }
@@ -73,20 +73,20 @@ RSpec.describe BlueGreenWorkers do
       let(:cluster_name) { 'inactive' }
       let(:active_cluster) { 'active' }
 
-      it 'does not execute the worker' do
+      it 'does not when_active the worker' do
         ran = false
-        described_class.execute { ran = true }
+        described_class.when_active { ran = true }
         expect(ran).to be false
       end
 
       it 'sleeps for delay: seconds' do
         expect(described_class).to receive(:sleep).with(10).and_return 10
-        result = described_class.execute(delay: 10) { true }
+        result = described_class.when_active(delay: 10) { true }
         expect(result).to be_nil
       end
 
       it 'returns return:' do
-        result = described_class.execute(return: []) { true }
+        result = described_class.when_active(return: []) { true }
         expect(result).to eq []
       end
     end
@@ -97,7 +97,7 @@ RSpec.describe BlueGreenWorkers do
 
       it 'executes the worker' do
         ran = false
-        described_class.execute { ran = true }
+        described_class.when_active { ran = true }
         expect(ran).to be true
       end
     end

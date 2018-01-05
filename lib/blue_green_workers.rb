@@ -21,11 +21,11 @@ module BlueGreenWorkers
     config.validate
   end
 
-  def self.execute(opts = {})
+  def self.when_active(opts = {})
     if config.active_cluster_block.call == config.cluster_name
       yield
     else
-      logger.debug 'Workers not active, skipping BlueGreenWorkers#execute'
+      logger.debug 'Cluster not active, skipping BlueGreenWorkers#when_active'
       opts[:delay] && sleep(opts[:delay])
       opts[:return]
     end
